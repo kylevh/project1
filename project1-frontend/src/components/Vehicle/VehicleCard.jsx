@@ -45,6 +45,22 @@ const VehicleCard = ({ vehicleData }) => {
         return response.json();
     };
 
+    const handleDelete = async () => {
+        try {
+            const response = await fetch(`http://localhost:8282/api/vehicles/${vehicleData.id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error('Failed to delete vehicle');
+            }
+            // Call a prop function to update the parent component's state
+            onDelete(vehicleData.id);
+        } catch (error) {
+            console.error('Error deleting vehicle:', error);
+            // Handle error, e.g., show an error message to the user
+        }
+    };
+
     return (
         <>
             <div className="flex flex-col shadow-lg bg-[#F5F8FC] w-80 h-[21rem] m-4">
@@ -53,13 +69,13 @@ const VehicleCard = ({ vehicleData }) => {
                     <img src="/tesla-icon.png" alt="Tesla" className="w-24 h-24 object-contain m-auto" />
                     <h3 className="text-3xl font-semibold font-sfpro text-[#212121]">{vehicleData.model}</h3>
                     <h4 className="text-xl font-semibold font-sfpro text-[#CACACA] -mt-1 mb-2">{vehicleData.warehouse.name}</h4>
+                    <p className="text-base font-regular font-sfpro text-[#CACACA] -mt-1"><span className="text-base font-semibold font-sfpro text-[#212121]">ID</span> {vehicleData.id}</p>
                     <p className="text-base font-regular font-sfpro text-[#CACACA]"><span className="text-base font-semibold font-sfpro text-[#212121]">YEAR</span> {vehicleData.year}</p>
                     <p className="text-base font-regular font-sfpro text-[#CACACA] -mt-1"><span className="text-base font-semibold font-sfpro text-[#212121]">VIN</span> {vehicleData.vin}</p>
-                    <p className="text-base font-regular font-sfpro text-[#CACACA] -mt-1"><span className="text-base font-semibold font-sfpro text-[#212121]">ID</span> {vehicleData.id}</p>
                 </div>
                 <div className="flex justify-center w-full">
                     <button onClick={handleEdit} className="bg-[#212121] text-white font-regular py-2 px-4  transition duration-300 ease-in-out hover:bg-transparent hover:text-[#212121] hover:border hover:border-[#212121]">Edit</button>
-                    <button className="ml-4 bg-[#212121] text-white font-regular py-2 px-4  transition duration-300 ease-in-out hover:bg-transparent hover:text-[#212121] hover:border hover:border-[#212121]">Delete</button>
+                    <button onClick={handleDelete} className="ml-4 bg-[#212121] text-white font-regular py-2 px-4  transition duration-300 ease-in-out hover:bg-transparent hover:text-[#212121] hover:border hover:border-[#212121]">Delete</button>
                 </div>
             </div>
             <EditVehicleModal

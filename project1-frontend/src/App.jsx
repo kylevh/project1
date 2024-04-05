@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Admin from './pages/Admin';
 import AllWarehouses from './pages/AllWarehouses';
 import AllVehicles from './pages/AllVehicles';
+import WarehousePage from './pages/WarehousePage';
 
 export default function App() {
 
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/warehouses" element={<AllWarehouses />} />
           <Route path="/admin/vehicles" element={<AllVehicles />} />
+          <Route path="/warehouse/:warehouseId" element={<WarehousePage />} />
         </Routes>
       </BrowserRouter>
     </>

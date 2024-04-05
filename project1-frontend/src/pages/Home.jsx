@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from '../components/NavBar';
+import {Link} from 'react-router-dom';
 
 export default function Home() {
     return (
@@ -13,11 +14,11 @@ export default function Home() {
                         <h2 className="text-white text-4xl font-sfpro font-medium ml-4">Organize. <br className="mb-2"/> Manage. <br className="mb-2"/> Inventory.</h2>
                         
                         <p className="text-white text-lg font-sfpro ml-4 pt-5">Easily manage your vehicle<br/> inventory with our intuitive<br/> system</p>
-                    <a href="/admin">
+                    <Link to="/admin">
                         <button className="rounded-full ml-4 col-span-1 col-start-3 border-white border-2 p-2 mr-4 duration-200 mt-6 w-40 text-center text-lg hover:bg-white hover:text-black">
                             Dashboard
                         </button>
-                    </a>
+                    </Link>
 
                     </div>
                 </div>

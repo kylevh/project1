@@ -35,7 +35,7 @@ public class Vehicle {
     private Boolean isReserved = false;
 
     @Column(name = "is_soft_deleted", nullable = false)
-    private Boolean isSoftDeleted;
+    private Boolean isSoftDeleted = false;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id")

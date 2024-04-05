@@ -13,9 +13,10 @@ export default function WarehousesGrid() {
         const data = await response.json();
         setWarehouses(data);
     };
+    
 
     return (
-        <div className="grid grid-cols-4 place-items-center w-full p-32">
+        <div className="grid grid-cols-5 place-items-center w-full p-32">
             {warehouses.map(warehouse => (
                 <WarehouseCard warehouseData={warehouse} key={warehouse.warehouseId}/>
             ))}

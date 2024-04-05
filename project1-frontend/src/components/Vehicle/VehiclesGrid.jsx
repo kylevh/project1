@@ -5,26 +5,28 @@ export default function VehiclesGrid() {
     const [vehicles, setVehicles] = useState([]);
 
     useEffect(() => {
-      fetchVehicles();
+        fetchVehicles();
     }, []);
-  
+
     const fetchVehicles = async () => {
-      const response = await fetch('http://localhost:8282/api/vehicles/all');
-      const data = await response.json();
-      setVehicles(data);
+        const response = await fetch('http://localhost:8282/api/vehicles/all');
+        const data = await response.json();
+        setVehicles(data);
     };
-  
+
     const handleVehicleUpdate = (updatedVehicle) => {
-      const updatedVehicles = vehicles.map(vehicle => 
-        vehicle.id === updatedVehicle.id ? updatedVehicle : vehicle
-      );
-      setVehicles(updatedVehicles);
+        const updatedVehicles = vehicles.map(vehicle => vehicle.id === updatedVehicle.id ? updatedVehicle : vehicle);
+        setVehicles(updatedVehicles);
+    };
+
+    const handleVehicleDelete = (deletedVehicleId) => {
+        setVehicles(vehicles.filter(vehicle => vehicle.id !== deletedVehicleId));
     };
 
     return (
         <div className="grid grid-cols-5 place-items-center gap-0  w-full p-32 ">
             {vehicles.map(vehicle => (
-                <VehicleCard vehicleData={vehicle} key={vehicle.id}/>
+                <VehicleCard vehicleData={vehicle} key={vehicle.id} onDelete={handleVehicleDelete} onUpdate={handleVehicleUpdate} />
             ))}
         </div>
     );
