@@ -3,6 +3,8 @@ package com.skillstorm.project1backend.models;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,30 +21,32 @@ public class Warehouse {
     @Column(name = "location", nullable = false)
     private String location;
 
-    @Column(name = "width", nullable = false)
-    private BigDecimal width;
+    @Column(name="capacity", nullable = false)
+    private Integer capacity;
 
-    @Column(name = "length", nullable = false)
-    private BigDecimal length;
+    public Integer getCapacity() {
+        return capacity;
+    }
 
-    @Column(name = "height", nullable = false)
-    private BigDecimal height;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
 
-    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Vehicle> vehicles;
+    // public void setVehicles(List<Vehicle> vehicles) {
+    //     this.vehicles = vehicles;
+    // }
+
+    // @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<Vehicle> vehicles;
 
     public Warehouse() {
     }
 
-    public Warehouse(String name, String location, BigDecimal width, BigDecimal length, BigDecimal height) {
+    public Warehouse(String name, String location, Integer capacity) {
         this.name = name;
         this.location = location;
-        this.width = width;
-        this.length = length;
-        this.height = height;
+        this.capacity = capacity;
     }
-
-    
 
     public Warehouse(Long warehouseId) {
         this.warehouseId = warehouseId;
@@ -70,29 +74,5 @@ public class Warehouse {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public BigDecimal getWidth() {
-        return width;
-    }
-
-    public void setWidth(BigDecimal width) {
-        this.width = width;
-    }
-
-    public BigDecimal getLength() {
-        return length;
-    }
-
-    public void setLength(BigDecimal length) {
-        this.length = length;
-    }
-
-    public BigDecimal getHeight() {
-        return height;
-    }
-
-    public void setHeight(BigDecimal height) {
-        this.height = height;
     }
 }

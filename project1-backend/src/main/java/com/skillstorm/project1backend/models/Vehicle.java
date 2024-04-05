@@ -1,5 +1,7 @@
 package com.skillstorm.project1backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,15 +30,6 @@ public class Vehicle {
 
     @Column(name = "vin", nullable = false, unique = true)
     private String vin;
-
-    @Column(name = "width", nullable = false)
-    private Double width;
-
-    @Column(name = "length", nullable = false)
-    private Double length;
-
-    @Column(name = "height", nullable = false)
-    private Double height;
 
     @Column(name = "is_reserved", nullable = false)
     private Boolean isReserved = false;
@@ -100,30 +93,6 @@ public class Vehicle {
         this.vin = vin;
     }
 
-    public Double getWidth() {
-        return width;
-    }
-
-    public void setWidth(Double width) {
-        this.width = width;
-    }
-
-    public Double getLength() {
-        return length;
-    }
-
-    public void setLength(Double length) {
-        this.length = length;
-    }
-
-    public Double getHeight() {
-        return height;
-    }
-
-    public void setHeight(Double height) {
-        this.height = height;
-    }
-
     public Boolean getIsReserved() {
         return isReserved;
     }
@@ -158,9 +127,6 @@ public class Vehicle {
         result = prime * result + ((year == null) ? 0 : year.hashCode());
         result = prime * result + ((color == null) ? 0 : color.hashCode());
         result = prime * result + ((vin == null) ? 0 : vin.hashCode());
-        result = prime * result + ((width == null) ? 0 : width.hashCode());
-        result = prime * result + ((length == null) ? 0 : length.hashCode());
-        result = prime * result + ((height == null) ? 0 : height.hashCode());
         result = prime * result + ((isReserved == null) ? 0 : isReserved.hashCode());
         result = prime * result + ((isSoftDeleted == null) ? 0 : isSoftDeleted.hashCode());
         result = prime * result + ((warehouse == null) ? 0 : warehouse.hashCode());
@@ -200,21 +166,6 @@ public class Vehicle {
             if (other.vin != null)
                 return false;
         } else if (!vin.equals(other.vin))
-            return false;
-        if (width == null) {
-            if (other.width != null)
-                return false;
-        } else if (!width.equals(other.width))
-            return false;
-        if (length == null) {
-            if (other.length != null)
-                return false;
-        } else if (!length.equals(other.length))
-            return false;
-        if (height == null) {
-            if (other.height != null)
-                return false;
-        } else if (!height.equals(other.height))
             return false;
         if (isReserved == null) {
             if (other.isReserved != null)
