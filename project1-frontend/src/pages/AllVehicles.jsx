@@ -7,7 +7,6 @@ const AllVehicles = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = async (newVehicle) => {
-    console.log("SAINVG!");
     try {
       const response = await fetch('http://localhost:8282/api/vehicles', {
         method: 'POST',

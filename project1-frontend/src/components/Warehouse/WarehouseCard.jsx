@@ -7,6 +7,39 @@ const WarehouseCard = ({ warehouseData }) => {
     const navigate = useNavigate();
     const { warehouseId } = useParams();
 
+    
+    const handleEdit = () => {
+        setIsEditModalOpen(true);
+    };
+
+    const handleSave = async (udpatedWarehouse) => {
+        try {
+            const savedWarehouse = await updateWarehouse(udpatedWarehouse);
+            // Update the UI accordingly, e.g., refresh the vehicle list or update the state
+            setIsEditModalOpen(false);
+        } catch (error) {
+            console.error('Error updating warehouse:', error);
+            // Handle error, e.g., show an error message to the user
+        }
+    };
+
+    const updateWarehouse = async (updatedWarehouse) => {
+        const response = await fetch(`http://localhost:8282/api/warehouse/${updatedWarehouse.warehouseId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedWarehouse),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update vehicle');
+        }
+
+        return response.json();
+    };
+
+
     const handleDelete = async () => {
         try {
             const response = await fetch(`http://localhost:8282/api/warehouses/${warehouseData.warehouseId}`, {
@@ -21,30 +54,10 @@ const WarehouseCard = ({ warehouseData }) => {
             console.error('Error deleting warehouse:', error);
             // Handle error, e.g., show an error message to the user
         }
+        window.location.reload();
     };
 
-    const handleEdit = () => {
-        setIsEditModalOpen(true);
-    };
 
-    const handleSave = async (updatedWarehouse) => {
-        try {
-            const response = await fetch(`http://localhost:8282/api/warehouses/${updatedWarehouse.warehouseId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedWarehouse),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to update warehouse');
-            }
-            setIsEditModalOpen(false);
-        } catch (error) {
-            console.error('Error updating warehouse:', error);
-            // Handle error, e.g., show an error message to the user
-        }
-    };
 
 
 

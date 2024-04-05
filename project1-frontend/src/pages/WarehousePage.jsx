@@ -8,6 +8,7 @@ const WarehousePage = () => {
     const { warehouseId } = useParams();
     const [vehicles, setVehicles] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [warehouseName, setWarehouseName] = useState('');
 
     const handleSave = async (newVehicle) => {
         console.log("SAINVG!");
@@ -28,6 +29,15 @@ const WarehousePage = () => {
             console.error('Error creating new vehicle:', error);
         }
     };
+
+        useEffect(() => {
+        const fetchWarehouseName = async () => {
+            const response = await fetch(`http://localhost:8282/api/warehouses/${warehouseId}`);
+            const data = await response.json();
+            setWarehouseName(data.name);
+        };
+        fetchWarehouseName();
+    }, [warehouseId]);
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -51,7 +61,7 @@ const WarehousePage = () => {
     return (
         <div className="flex flex-col justify-center items-center  min-h-screen min-w-screen bg-[#F5F8FC]">
             <Link to="/admin"><img src="/tesla-logo-black.png" alt="Logo" className="absolute top-6 left-6 m-4 w-42" /></Link>
-            <h1 className="text-5xl font-regular font-sfpro text-[#212121] mt-36">Warehouse {warehouseId}</h1>
+            <h1 className="text-5xl font-regular font-sfpro text-[#212121] mt-36">{warehouseName}</h1>
             <button onClick={() => setIsModalOpen(true)} className="mt-10 bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Add New Vehicle</button>
             <WarehouseVehiclesGrid vehicles={vehicles} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} />
             <NewVehicleModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} />

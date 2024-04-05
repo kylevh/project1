@@ -6,9 +6,9 @@ const VehicleCard = ({ vehicleData }) => {
 
     const colorMap = {
         Red: '#FF5757',
-        Blue: '#0085D0', 
-        Grey: '#FFFFFF', 
-        White: '#FFFFFF', 
+        Blue: '#0085D0',
+        Grey: '#FFFFFF',
+        White: '#FFFFFF',
         Silver: '#FFFFFF',
         Black: '#212121'
     };
@@ -23,10 +23,10 @@ const VehicleCard = ({ vehicleData }) => {
             const savedVehicle = await updateVehicle(updatedVehicle);
             // Update the UI accordingly, e.g., refresh the vehicle list or update the state
             setIsModalOpen(false);
-          } catch (error) {
+        } catch (error) {
             console.error('Error updating vehicle:', error);
             // Handle error, e.g., show an error message to the user
-          }
+        }
     };
 
     const updateVehicle = async (updatedVehicle) => {
@@ -59,6 +59,12 @@ const VehicleCard = ({ vehicleData }) => {
             console.error('Error deleting vehicle:', error);
             // Handle error, e.g., show an error message to the user
         }
+        window.location.reload();
+    };
+
+    const modelImageMap = {
+        'Tesla Roadster': '/tesla-roadster.png',
+        'Tesla Cybertruck': '/tesla-cybertruck.png',
     };
 
     return (
@@ -66,7 +72,7 @@ const VehicleCard = ({ vehicleData }) => {
             <div className="flex flex-col shadow-lg bg-[#F5F8FC] w-80 h-[21rem] m-4">
                 <div style={{ backgroundColor: vehicleColorCode }} className="w-80 min-h-3"></div>
                 <div className="p-4 w-full flex flex-col">
-                    <img src="/tesla-icon.png" alt="Tesla" className="w-24 h-24 object-contain m-auto" />
+                    <img src={modelImageMap[vehicleData.model] || '/tesla-icon.png'} alt="Tesla" className="w-24 h-24 object-contain m-auto" />
                     <h3 className="text-3xl font-semibold font-sfpro text-[#212121]">{vehicleData.model}</h3>
                     <h4 className="text-xl font-semibold font-sfpro text-[#CACACA] -mt-1 mb-2">{vehicleData.warehouse.name}</h4>
                     <p className="text-base font-regular font-sfpro text-[#CACACA] -mt-1"><span className="text-base font-semibold font-sfpro text-[#212121]">ID</span> {vehicleData.id}</p>
