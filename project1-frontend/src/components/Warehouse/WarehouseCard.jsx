@@ -12,9 +12,9 @@ const WarehouseCard = ({ warehouseData }) => {
         setIsEditModalOpen(true);
     };
 
-    const handleSave = async (udpatedWarehouse) => {
+    const handleSave = async (updatedWarehouse) => {
         try {
-            const savedWarehouse = await updateWarehouse(udpatedWarehouse);
+            const savedWarehouse = await updateWarehouse(updatedWarehouse);
             // Update the UI accordingly, e.g., refresh the vehicle list or update the state
             setIsEditModalOpen(false);
         } catch (error) {
@@ -24,7 +24,7 @@ const WarehouseCard = ({ warehouseData }) => {
     };
 
     const updateWarehouse = async (updatedWarehouse) => {
-        const response = await fetch(`http://localhost:8282/api/warehouse/${updatedWarehouse.warehouseId}`, {
+        const response = await fetch(`http://localhost:8282/api/warehouses/${updatedWarehouse.warehouseId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
